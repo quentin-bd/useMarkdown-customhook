@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import useMarkdown from './hooks/useMarkdown'
 
 function App() {
+
+  const { bind, markInput, markOutput } = useMarkdown()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div>
+        <label className="heading" for="mark-input">Enter Markdown Text here</label><br />
+        <textarea
+          id="mark-input"
+          name=''
+          value={markInput}
+          placeholder='blahblahblah'
+          {...bind}
+        ></textarea>
+      </div>
+
+      <div>
+        <h2 className="heading">Your formatted text :</h2>
+        <div id='mark-output' dangerouslySetInnerHTML={markOutput(markInput)}></div>
+      </div>
     </div>
   );
 }
+
 
 export default App;
